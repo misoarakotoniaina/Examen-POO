@@ -20,7 +20,7 @@ public class DataConfig {
     @Value("1234")
     private String password;
 
-    public DatabaseConfig() {}
+    public DataConfig() {}
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
