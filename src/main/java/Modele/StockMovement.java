@@ -1,11 +1,16 @@
 package Modele;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Instant;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+
 
 public class StockMovement {
     private enum movementType{

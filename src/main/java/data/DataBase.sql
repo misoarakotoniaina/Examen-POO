@@ -1,14 +1,22 @@
-INSERT INTO movement_type (code, label) VALUES
- ('IN', 'Entrée de stock'),
- ('OUT', 'Sortie (Vente)');
+CREATE TABLE movement_type (
+  code VARCHAR(20) PRIMARY KEY,
+  label VARCHAR(50) NOT NULL
+);
 
-INSERT INTO product (id, name, description, price) VALUES
-  ('001', 'Clavier mecanique', 'Clavier RGB Switch Red', 85.000),
-  ('002', 'Souris Sans Fil', 'Souris ergonomique 4000 DPI', 40.000),
-  ('003', 'Écran 27 pouces', 'Moniteur 4K IPS 144Hz', 300.000);
+CREATE TABLE product (
+  id STRING PRIMARY KEY,
+  name VARCHAR(100),
+  description TEXT,
+  unit_price BIGDECIMAL(10, 2) NOT NULL,
+);
 
-INSERT INTO stock_movement (id, createdAt, movementType, quantity) VALUES
-  (1, '20 August 2026', 'IN', 40),
-  (1, '15 July 2026', 'OUT', 20),
-  (2, '17 August 2026', 'OUT', 64),
-  (3, '28 April 2026', 'IN', 15);
+CREATE TABLE stock_movement (
+  id STRING PRIMARY KEY,
+  product_id STRING NOT NULL,
+  created_at INSTANT DEFAULT CURRENT_TIMESTAMP,
+  movement_type VARCHAR(3) NOT NULL CHECK (movement_type IN ('IN', 'OUT')),
+  quantity INT NOT NULL,
+  CONSTRAINT fk_movement_product
+  FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
+);
+Insertion des D
